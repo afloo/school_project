@@ -1,0 +1,124 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+</head>
+<body>
+
+<h2>Order Form</h2>
+
+<form action="#" method="post" id="orderForm">
+    {% csrf_token %}
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="dob">DOB:</label>
+    <input type="date" id="dob" name="dob" required><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required><br>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender" required>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+    </select><br>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" required></textarea><br>
+
+    <label for="category">Select Department:</label>
+  <select id="category" onchange="populateItems()">
+    <option value="commerce">Commerce</option>
+    <option value="science">Science</option>
+    <option value="humanities">Humanities</option>
+    <option value="engineering">Engineering</option>
+    <option value="BSc">BSc CS</option>
+  </select><br>
+
+  <label for="items">Select Course:</label>
+  <select id="items"></select><br>
+
+
+    <label for="purpose">Purpose:</label>
+    <select id="purpose" name="purpose" required>
+        <option value="enquiry">Enquiry</option>
+        <option value="place_order">Place Order</option>
+        <option value="return">Return</option>
+        <option value="visit">Visit</option>
+    </select><br>
+
+    <label>Materials Provide:</label><br>
+    <input type="checkbox" id="notebook" name="materials[]" value="notebook">
+    <label for="notebook">Notebook</label><br>
+
+    <input type="checkbox" id="pen" name="materials[]" value="pen">
+    <label for="pen">Pen</label><br>
+
+    <input type="checkbox" id="examPapers" name="materials[]" value="exam_papers">
+    <label for="examPapers">Exam Papers</label><br>
+
+    <input type="checkbox" id="certificate" name="materials[]" value="certificate">
+    <label for="examPapers">Certificate</label><br>
+
+    <input type="button" value="Submit" onclick="redirectToPage()">
+    <button type="button" onclick="submitForm()">Logout</button>
+</form>
+
+<script>
+    function redirectToPage() {
+            // You can add any additional form processing logic here before redirecting
+            // For example, validate form fields
+
+            // Redirect to another page
+            window.location.href = '/order';
+        }
+</script>
+
+<script>
+    // Define items for each category
+    const itemsByCategory = {
+       commerce: ['BBA', 'BCom', 'CMA'],
+     science: ['BSc', 'MSc', 'ph.D'],
+      humanities: ['BA LLB', 'BJMC', 'BFA'],
+      engineering: ['Mechanical engineering', 'civil engineering', 'electrical engineering'],
+      BSc: ['Database Management Systems', 'Web Development and Technologies', 'Software Development and Engineering'],
+
+    };
+
+    // Function to populate the second dropdown based on the selected category
+    function populateItems() {
+      const categoryDropdown = document.getElementById('category');
+      const itemsDropdown = document.getElementById('items');
+      const selectedCategory = categoryDropdown.value;
+
+      // Clear existing options
+      itemsDropdown.innerHTML = '';
+
+      // Populate with items based on the selected category
+      itemsByCategory[selectedCategory].forEach(item => {
+        const option = document.createElement('option');
+        option.value = item;
+        option.text = item;
+        itemsDropdown.appendChild(option);
+      });
+    }
+
+    // Initial population when the page loads
+    populateItems();
+  </script>
+
+
+</body>
+</html>

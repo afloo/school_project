@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home - School Store{% endblock %}
+
+{% block navbar %}
+    {% include 'nav.html' %}
+{% endblock %}
+
+{% block content %}
+    <h1>WELCOME TO THE  EDU TRACK.COM</h1>
+<div>
+<img class="my_image my_image_padding" src="{% static 'img/banners.png' %}" alt="our products" width="1500px">
+</div>
+
+{% endblock %}
